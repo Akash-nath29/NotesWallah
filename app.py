@@ -81,20 +81,20 @@ admin.add_view(ModelView(User, db.session))
 admin.add_view(ModelView(Post, db.session))
 admin.add_view(ModelView(Music, db.session))
 
-firebaseConfig = {
-          'apiKey' : "AIzaSyCQkjV7XaPn6woOpi97Jl-XZtFsfz8NZFg",
-          'authDomain' : "noteswallah2023.firebaseapp.com",
-          'databaseURL' : "https://noteswallah2023-default-rtdb.asia-southeast1.firebasedatabase.app/",
-          'projectId' : "noteswallah2023",
-          'storageBucket' : "noteswallah2023.appspot.com",
-          'messagingSenderId' : "936818867625",
-          'appId' : "1:936818867625:web:41a3363ad80ce0e240d8b8",
-          'measurementId' : "G-7ZZH98GYBP"
-        };
+# firebaseConfig = {
+#           'apiKey' : "AIzaSyCQkjV7XaPn6woOpi97Jl-XZtFsfz8NZFg",
+#           'authDomain' : "noteswallah2023.firebaseapp.com",
+#           'databaseURL' : "https://noteswallah2023-default-rtdb.asia-southeast1.firebasedatabase.app/",
+#           'projectId' : "noteswallah2023",
+#           'storageBucket' : "noteswallah2023.appspot.com",
+#           'messagingSenderId' : "936818867625",
+#           'appId' : "1:936818867625:web:41a3363ad80ce0e240d8b8",
+#           'measurementId' : "G-7ZZH98GYBP"
+#         };
 
-firebase = pyrebase.initialize_app(firebaseConfig)
+# firebase = pyrebase.initialize_app(firebaseConfig)
 
-auth = firebase.auth()
+# auth = firebase.auth()
 
 @app.route('/')
 def home():
@@ -106,23 +106,24 @@ def login():
         email = request.form['email']
         password = request.form['password']
 
-        try:
-            auth.sign_in_with_email_and_password(email, password)
-            user = User.query.filter_by(email=email).first()
-            session['user_id'] = user.id
-            flash('Login Successful', 'Success')
-            return redirect(url_for('dashboard'))
-        except:
-            flash('Enter Proper email and password', 'danger')
-            return redirect(url_for('login'))
-
-
-
-        # if user and check_password_hash(user.password, password):
-        #     flash('Login successful!', 'success')
+        # try:
+        #     auth.sign_in_with_email_and_password(email, password)
+        #     session['user_id'] = user.id  
+        #     flash('Login Successful', 'Success')
         #     return redirect(url_for('dashboard'))
-        # else:
-        #     flash('Login failed. Check your username and password.', 'danger')
+        # except:
+        #     flash('Enter Proper email and password', 'danger')
+        #     return redirect(url_for('login'))
+
+
+
+        user = User.query.filter_by(email=email).first()
+        if user and check_password_hash(user.password, password):
+            flash('Login successful!', 'success')
+            session['user_id'] = user.id
+            return redirect(url_for('dashboard'))
+        else:
+            flash('Login failed. Check your username and password.', 'danger')
 
     return render_template('login.html')
 
@@ -134,27 +135,8 @@ def register():
         password = request.form['password']
 
 
-        try:
-            auth.create_user_with_email_and_password(email, password)
-            hashed_password = generate_password_hash(password)
-
-            new_user = User(username=username, email=email, password=hashed_password)
-
-            db.session.add(new_user)
-            db.session.commit()
-
-            flash('Registration successful! You can now log in.', 'success')
-            return redirect(url_for('login'))
-        except:
-            flash('Username or email already exists. Please choose a different one.', 'danger')
-            return redirect(url_for('register'))
-
-
-        # existing_user = User.query.filter((User.username == username) | (User.email == email)).first()
-
-        # if existing_user:
-        #     flash('Username or email already exists. Please choose a different one.', 'danger')
-        # else:
+        # try:
+        #     auth.create_user_with_email_and_password(email, password)
         #     hashed_password = generate_password_hash(password)
 
         #     new_user = User(username=username, email=email, password=hashed_password)
@@ -164,6 +146,25 @@ def register():
 
         #     flash('Registration successful! You can now log in.', 'success')
         #     return redirect(url_for('login'))
+        # except:
+        #     flash('Username or email already exists. Please choose a different one.', 'danger')
+        #     return redirect(url_for('register'))
+
+
+        existing_user = User.query.filter((User.username == username) | (User.email == email)).first()
+
+        if existing_user:
+            flash('Username or email already exists. Please choose a different one.', 'danger')
+        else:
+            hashed_password = generate_password_hash(password)
+
+            new_user = User(username=username, email=email, password=hashed_password)
+
+            db.session.add(new_user)
+            db.session.commit()
+
+            flash('Registration successful! You can now log in.', 'success')
+            return redirect(url_for('login'))
 
     return render_template('register.html')
 

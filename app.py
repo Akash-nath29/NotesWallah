@@ -10,7 +10,7 @@
 from flask import Flask, render_template, request, redirect, session, flash, url_for, send_file, abort
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import desc
-# import secrets
+import secrets
 from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
 import os
@@ -37,7 +37,7 @@ ist_now = utc_now.replace(tzinfo=pytz.utc).astimezone(ist_timezone)
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database.db"
-app.secret_key = "kfwi4f4BEpiOoeninEknk"
+app.secret_key = secrets.token_hex(64)
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
 
 # oauth = OAuth(app)

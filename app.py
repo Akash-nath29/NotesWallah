@@ -331,4 +331,4 @@ def change_pass():
     return render_template('change_password.html')
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=6010)
+    app.run(debug=True, host='0.0.0.0', port=6011)

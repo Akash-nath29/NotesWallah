@@ -109,7 +109,7 @@
                 <iframe src="{{post_detail.post.file_path}}" frameborder="0" oncontextmenu="return false;"></iframe>
             </div>
             <div class="dashboard-content">
-                <a href="#">
+                <a href="{{ url_for('view_post', post_id=post_detail.post.id) }}">
                     <span class="title">
                         {{post_detail.post.file_name}}
                     </span>

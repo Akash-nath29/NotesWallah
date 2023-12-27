@@ -1,4 +1,4 @@
-![favicon](https://github.com/Akash-nath29/NotesWallah/assets/100131577/6e0bc138-b60c-4427-b966-66f7a345a37a)
+<center><img src="https://github.com/Akash-nath29/NotesWallah/assets/100131577/6e0bc138-b60c-4427-b966-66f7a345a37a" width="100"></center>
 
 # NotesWallah - Class Notes and Study Music Sharing Platform 📚🎶
 

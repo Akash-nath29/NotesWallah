@@ -1,3 +1,6 @@
+#To, the developer, I made this site for fun. But eventually I messed it up. If it doesn't work on 
+# your device, remember it runs on mine. So it's your responsibility to fix this. Good luck !!
+
 #----------NotesWallah-----------#
 #------Author: Akash Nath--------#
 #-----https://github.com/Akash-nath29----#

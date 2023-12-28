@@ -14,11 +14,10 @@ let hamburgerIcon = document.getElementById('hamburgerIcon');
 // if (menu) {
 //     menu.style.maxHeight = "0px";
 // }
-
 function openMenu() {
-    if (menu.style.maxHeight === "0px") {
-        menu.style.maxHeight = "50px";
+    if (menu.style.display == "none") {
+        menu.style.display = "flex";
     } else {
-        menu.style.maxHeight = "0px";
+        menu.style.display = "none";
     }
 }

@@ -49,13 +49,13 @@ nav {
     text-decoration: none;
 }
 
-nav .nav-links {
+.nav-links {
     display: flex;
     align-items: center;
     justify-content: center;
     list-style: none;
     margin-right: 5vh;
-    width: 100%;
+    width: 70%;
 }
 
 nav .nav-links a {
@@ -230,10 +230,6 @@ nav .nav-links a:hover {
     color: white;
 }
 
-.tab-container #notes {
-    /* transform: translateX(0px); */
-    display: block;
-}
 
 .music-card {
     display: flex;
@@ -400,54 +396,6 @@ svg {
     color: #313131;
 }
 
-@media screen and (max-width: 800px) {
-    #hamburgerIcon {
-        display: block;
-        background-color: transparent;
-        border: none;
-        outline: none;
-    }
-
-    .nav {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
-        overflow: hidden;
-    }
-
-    .nav-brand {
-        margin-top: auto;
-        margin-bottom: auto;
-    }
-
-    .nav-links {
-        /* display: none; */
-        display: flex;
-        width: 100%;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: center;
-        /* overflow: hidden; */
-        z-index: 995;
-        /* overflow: visible; */
-        margin-top: 25vh;
-    }
-
-    .nav-links a {
-        margin: 1vh 0;
-    }
-
-    #mobileFriendlyHeader {
-        width: 100%;
-    }
-
-    #musicFrame {
-        width: 50;
-        height: 25;
-    }
-}
 
 /* table {
     height: 100vh;
@@ -534,4 +482,160 @@ td {
 
 .action:hover span {
     transform: translateX(4px);
+}
+
+/* .tab-container #notes {
+    transform: translateX(0px);
+    display: grid !important;
+} */
+
+#notes {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+#music {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+#musicFrame {
+    width: 500px;
+    height: 300px;
+}
+
+.left-pane {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+
+@media only screen and (max-width: 600px) {
+    #hamburgerIcon {
+        display: block;
+        background-color: transparent;
+        border: none;
+        outline: none;
+    }
+
+    .nav {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 1000;
+        /* overflow: hidden; */
+    }
+
+    .nav .nav-brand {
+        margin-top: auto;
+        margin-bottom: auto;
+        width: 100%;
+    }
+
+    .nav .nav-links {
+        /* display: none; */
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        /* overflow: hidden; */
+        z-index: 1001;
+        /* overflow: visible; */
+        margin-right: 0;
+        margin-top: 5vh;
+        background-color: white;
+        line-height: 45px;
+        box-shadow: 0 0 10px #000;
+        padding: 2vh 0;
+
+    }
+
+    .nav-links a {
+        margin: 1vh 0;
+    }
+
+    #mobileFriendlyHeader {
+        width: 100%;
+        margin-bottom: 0;
+        font-size: 2rem;
+        /* text-align: center; */
+        display: flex;
+        align-items: center;
+        height: 100px;
+        margin-top: 50px;
+    }
+
+    #musicFrame {
+        width: 50;
+        height: 25;
+    }
+
+    .row-one {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 5vh 10px;
+    }
+
+    .left-pane {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .left-pane h1 {
+        font-size: 40px;
+    }
+
+    .left-pane p {
+        width: 80%;
+    }
+
+    .footer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .right-pane img {
+        width: 300px;
+        height: 300px;
+    }
+
+    .footer .leftColumn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 5vh;
+    }
+
+    #notes {
+        /* position: absolute; */
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 10px;
+    }
+
+    .dashboard-card {
+        margin: 20px 0;
+    }
+
+    #music {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 10px;
+    }
 }

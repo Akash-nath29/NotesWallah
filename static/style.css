@@ -140,6 +140,7 @@ nav .nav-links a:hover {
 
 .file-container {
     margin: 20px;
+    margin-top: 15vh;
 }
 
 .card {
@@ -158,6 +159,10 @@ nav .nav-links a:hover {
 
 .post-details {
     margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
 }
 
 .btn-primary {
@@ -563,6 +568,18 @@ td {
     background-color: #0056b3;
 }
 
+#back-to-dashboard {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 18px;
+    text-align: center;
+
+}
+#file-preview {
+    width: 500px;
+    height: 300px;
+}
+
 @media only screen and (max-width: 600px) {
     #hamburgerIcon {
         display: block;
@@ -693,10 +710,39 @@ td {
         align-items: center;
         justify-content: center;
     }
+
     #profile {
         margin: auto;
     }
+
     #user-profile-image {
         margin-top: 20vh;
+    }
+
+    .file-container {
+        width: 100%;
+        /* padding: 20px; */
+        margin: 10vh 2vh;
+    }
+
+    #view-profile-navigations {
+        width: 80%;
+        margin: auto;
+    }
+    #view-profile-navigations a {
+        font-size: 15px;
+    }
+
+    .post-details {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content:center;
+        width: 100%;
+    }
+    #file-preview {
+        width: 300px;
+        height: 200px;
     }
 }

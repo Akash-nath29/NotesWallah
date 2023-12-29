@@ -61,7 +61,7 @@
             </svg>
             Back to Dashboard
         </a>
-        <a href="{{ url_for('download_file', post_id=post.id) }}" class="btn btn-primary">Download File</a>
+
     </span>
     <div class="card">
         <div class="card-body">
@@ -69,14 +69,17 @@
 
             <div class="post-details">
                 {% if post.file_path %}
-                <iframe id="file-preview" src="{{url_for('static', filename=file_path)}}" frameborder="0" style="border: 1px solid black; margin: 0 5vw;"></iframe>
+                <iframe id="file-preview" src="{{url_for('static', filename=file_path)}}" frameborder="0"
+                    style="border: 1px solid black; margin: 0 5vw;"></iframe>
+                <a href="{{ url_for('download_file', post_id=post.id) }}" class="btn btn-primary btn-download">Download File</a>
                 {% else %}
                 <iframe src="Not Found" frameborder="0" width="500" height="300"
                     style="border: 1px solid black;"></iframe>
+                <a href="{{ url_for('download_file', post_id=post.id) }}" class="btn btn-primary">Download File</a>
                 {% endif %}
                 <div class="file-details">
-                    <h3>{{ post.file_name }}</h3>
-                    <p class="text-muted"><b>Author</b>: {{ post.author.username }}</p>
+                    <h1>{{ post.file_name }}</h1>
+                    <p class="text-muted"><b>{{ post.author.username }}</b></p>
                     <p><b>Description</b>: <br> {{ post.file_description }}</p>
                     <p class="text-muted" style="font-size: 10px;">{{ post.posted_at.strftime('%Y-%m-%d %H:%M:%S') }}
                     </p>

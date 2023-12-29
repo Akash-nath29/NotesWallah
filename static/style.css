@@ -514,6 +514,54 @@ td {
     gap: 20px;
 }
 
+#user-profile-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+
+}
+
+#profile {
+    max-width: 450px;
+    margin: 30vh 5vh;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#profile label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+#profile input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+#profile button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#profile button:hover {
+    background-color: #0056b3;
+}
 
 @media only screen and (max-width: 600px) {
     #hamburgerIcon {
@@ -637,5 +685,18 @@ td {
     #music {
         grid-template-columns: repeat(1, 1fr);
         gap: 10px;
+    }
+
+    .user-profile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    #profile {
+        margin: auto;
+    }
+    #user-profile-image {
+        margin-top: 20vh;
     }
 }

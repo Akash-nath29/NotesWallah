@@ -6,43 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Notes Wallah{% endblock %}</title>
     <style>
-        #profile {
-            max-width: 450px;
-            margin: 30vh 5vh;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        #profile label {
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        #profile input {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 16px;
-            box-sizing: border-box;
-        }
-
-        #profile button {
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        #profile button:hover {
-            background-color: #0056b3;
-        }
-
         #profile img {
             max-width: 350px;
-            margin-top: 20px;
         }
     </style>
     <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
@@ -105,24 +70,23 @@
                 </a>
             </div>
         </div>
+        <div class="user-profile">
+            <img id="user-profile-image" src="{{ user.profile_picture }}" alt="Author's Profile Picture" width="500px" style="aspect-ratio: 1/1; size: cover; border-radius: 50%; border: 1px solid black;">
+            <form id="profile" method="POST" action="{{ url_for('profile') }}" enctype="multipart/form-data">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" value="{{ user.username }}" required>
 
-        <form id="profile" method="POST" action="{{ url_for('profile') }}" enctype="multipart/form-data">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" value="{{ user.username }}" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="{{ user.email }}" required>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" value="{{ user.email }}" required>
+                <label for="profile_picture">Profile Picture:</label>
+                <input type="file" id="profile_picture" name="profile_picture">
 
-            <label for="profile_picture">Profile Picture:</label>
-            <input type="file" id="profile_picture" name="profile_picture">
-
-            <button type="submit">Update Profile</button>
-            <br><br>
-            <a href="/change_password" style="font-size: 13px; margin: 10px 0;">Change Password</a>
-        </form>
-
-        <img src="{{ user.profile_picture }}" alt="Author's Profile Picture" width="500px"
-            style="aspect-ratio: 1/1; size: cover; border-radius: 50%; border: 1px solid black;">
+                <button type="submit">Update Profile</button>
+                <br><br>
+                <a href="/change_password" style="font-size: 13px; margin: 10px 0;">Change Password</a>
+            </form>
+        </div>
     </div>
     <footer class="footer">
         <!-- <p>Made with <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><path fill="#ff0000" d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/></svg> by <a href="https://akashnath.netlify.app">Akash</a></p> -->
@@ -211,7 +175,11 @@
     </footer>
     <div class="credit">
         <center>
-            <p style="align-items: center;">© Reserved || Made with <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><path fill="#ff0000" d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/></svg> by <a href="https://akashnath.netlify.app">Akash</a></p>
+            <p style="align-items: center;">© Reserved || Made with <svg xmlns="http://www.w3.org/2000/svg" height="16"
+                    width="16" viewBox="0 0 512 512">
+                    <path fill="#ff0000"
+                        d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
+                </svg> by <a href="https://akashnath.netlify.app">Akash</a></p>
         </center>
     </div>
 </body>

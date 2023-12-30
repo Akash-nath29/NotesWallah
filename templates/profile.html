@@ -71,7 +71,8 @@
             </div>
         </div>
         <div class="user-profile">
-            <img id="user-profile-image" src="{{ user.profile_picture }}" alt="Author's Profile Picture" width="500px" style="aspect-ratio: 1/1; size: cover; border-radius: 50%; border: 1px solid black;">
+            <img id="user-profile-image" src="{{ user.profile_picture }}" alt="Author's Profile Picture" width="500px"
+                style="aspect-ratio: 1/1; size: cover; border-radius: 50%; border: 1px solid black;">
             <form id="profile" method="POST" action="{{ url_for('profile') }}" enctype="multipart/form-data">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" value="{{ user.username }}" required>
@@ -180,6 +181,8 @@
                     <path fill="#ff0000"
                         d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
                 </svg> by <a href="https://akashnath.netlify.app">Akash</a></p>
+            <p style="align-items: center;">Special Credit to <a href="https://linktr.ee/chiragnahata">Chirag Nahata</a>
+            </p>
         </center>
     </div>
 </body>

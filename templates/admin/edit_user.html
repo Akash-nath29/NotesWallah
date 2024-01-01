@@ -1,0 +1,67 @@
+<!-- FILEPATH: /C:/Users/AKASH NATH/Desktop/vscode/NotesWallah/templates/admin/edit_post.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Post</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        form div {
+            margin: 10px 0;
+        }
+
+        form div label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        form div input[type="text"],
+        form div textarea {
+            width: 300px;
+        }
+
+        form div input[type="submit"] {
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Edit User</h1>
+
+    <form action="{{url_for('admin_panel_edit_user', user_id=user.id)}}" method="POST">
+        <!-- BEGIN: Title Input -->
+        <div>
+            <label for="title">Title:</label>
+            <input type="text" id="file_name" name="user_name" value="{{user.username}}">
+        </div>
+        <!-- END: Title Input -->
+
+        <!-- BEGIN: Content Input -->
+        <div>
+            <label for="content">Email:</label>
+            <input type="email" id="content" name="user_description" value="{{user.email}}">
+        </div>
+        <!-- END: Content Input -->
+        <!-- BEGIN: Content Input -->
+        <div>
+            <label for="content">Password:</label>
+            <input type="text" id="content" name="password" value="{{user.password}}">
+        </div>
+        <!-- END: Content Input -->
+        <div>
+            <label for="content">Profile Picture:</label>
+            <textarea id="content" name="password">{{user.profile_picture}}</textarea>
+        </div>
+        <!-- END: Content Input -->
+
+        <!-- BEGIN: Submit Button -->
+        <div>
+            <input type="submit" value="Save Changes">
+        </div>
+        <!-- END: Submit Button -->
+    </form>
+</body>
+</html>

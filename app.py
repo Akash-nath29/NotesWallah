@@ -19,12 +19,12 @@ import pytz
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 # import json
-from os import environ as env
+# from os import environ as env
 # from urllib.parse import quote_plus, urlencode
 
 # from authlib.integrations.flask_client import OAuth
 # from dotenv import find_dotenv, load_dotenv
-import pyrebase
+# import pyrebase
 
 
 # ENV_FILE = find_dotenv()
@@ -79,10 +79,10 @@ class Music(db.Model):
     posted_at = db.Column(db.DateTime(), default=ist_now)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
-admin = Admin(app)
-admin.add_view(ModelView(User, db.session))
-admin.add_view(ModelView(Post, db.session))
-admin.add_view(ModelView(Music, db.session))
+# admin = Admin(app)
+# admin.add_view(ModelView(User, db.session))
+# admin.add_view(ModelView(Post, db.session))
+# admin.add_view(ModelView(Music, db.session))
 
 # firebaseConfig = {
 #           'apiKey' : "AIzaSyCQkjV7XaPn6woOpi97Jl-XZtFsfz8NZFg",
@@ -98,6 +98,85 @@ admin.add_view(ModelView(Music, db.session))
 # firebase = pyrebase.initialize_app(firebaseConfig)
 
 # auth = firebase.auth()
+
+@app.route('/admin')
+def admin_panel():
+    
+    if 'user_id' not in session:
+        flash('You need to log in first.', 'danger')
+        return redirect(url_for('login'))
+    
+    current_user = User.query.get(session['user_id'])
+    if current_user.id != 2:
+        flash('You do not have permission to access the admin panel.', 'danger')
+        return redirect(url_for('dashboard'))
+    
+    posts = Post.query.all()
+    users = User.query.all()
+    musics = Music.query.all()
+    
+    return render_template("/admin/admin_panel.html", posts=posts, musics=musics, users=users)
+
+
+
+@app.route('/admin/deleteuser/<int:user_id>')
+def admin_panel_delete_user(user_id):
+    user = User.query.get(user_id)
+    db.session.delete(user)
+    db.session.commit()
+    return redirect(url_for('admin_panel'))
+
+@app.route('/admin/user/<int:user_id>', methods=['GET', 'POST'])
+def admin_panel_edit_user(user_id):
+    user = User.query.get(user_id)
+
+    if request.method == 'POST':
+        user.file_name = request.form.get('file_name')
+        user.file_description = request.form.get('file_description')
+        db.session.commit()
+        return redirect(url_for('admin_panel'))
+
+    return render_template('/admin/edit_user.html', user=user)
+
+
+
+@app.route('/admin/deletepost/<int:post_id>')
+def admin_panel_delete_post(post_id):
+    post = Post.query.get(post_id)
+    db.session.delete(post)
+    db.session.commit()
+    return redirect(url_for('admin_panel'))
+
+@app.route('/admin/editpost/<int:post_id>', methods=['GET', 'POST'])
+def admin_panel_edit_post(post_id):
+    post = Post.query.get(post_id)
+
+    if request.method == 'POST':
+        post.file_name = request.form.get('file_name')
+        post.file_description = request.form.get('file_description')
+        db.session.commit()
+        return redirect(url_for('admin_panel'))
+
+    return render_template('/admin/edit_post.html', post=post)
+
+@app.route('/admin/deletemusic/<int:music_id>')
+def admin_panel_delete_music(music_id):
+    music = Music.query.get(music_id)
+    db.session.delete(music)
+    db.session.commit()
+    return redirect(url_for('admin_panel'))
+
+@app.route('/admin/editmusic/<int:music_id>', methods=['GET', 'POST'])
+def admin_panel_edit_music(music_id):
+    music = Music.query.get(music_id)
+
+    if request.method == 'POST':
+        music.music_link = request.form.get('music_link')
+        music.music_name = request.form.get('music_name')
+        db.session.commit()
+        return redirect(url_for('admin_panel'))
+
+    return render_template('/admin/edit_music.html', music=music)
 
 @app.route('/')
 def home():

@@ -69,7 +69,7 @@ class Post(db.Model):
     file_name = db.Column(db.String(100), nullable=False)
     file_description = db.Column(db.Text, nullable=True)
     file_path = db.Column(db.String(255), nullable=False)
-    posted_at = db.Column(db.DateTime, default=ist_now)
+    posted_at = db.Column(db.DateTime)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
 class Music(db.Model):
@@ -305,7 +305,7 @@ def create_post():
             user_id = session['user_id']
             file_path = upload_file(file)
 
-            new_post = Post(file_name=file_name, file_description=file_description, file_path=file_path, user_id=user_id)
+            new_post = Post(file_name=file_name, file_description=file_description, file_path=file_path, posted_at=ist_now, user_id=user_id)
 
             db.session.add(new_post)
             db.session.commit()

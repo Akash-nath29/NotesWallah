@@ -61,13 +61,13 @@
     </div>
 </div>
 {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-    <ul>
-        {% for category, message in messages %}
-        <li class="{{ category }}">{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
+{% if messages %}
+<ul>
+    {% for category, message in messages %}
+    <li class="{{ category }}">{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
 {% endwith %}
 {% if post_details %}
 <div class="tab-container" style="position: relative;">
@@ -144,18 +144,21 @@
             <p class="card__content">{{post_detail.post.file_description}}</p>
             <div class="card__date">
                 <span style="display: flex; align-items: center; margin: 10px 0;">
-                    <img src="{{post_detail.author_profile_picture}}" alt="author profile picture" style="width:25px; height: 25px; aspect-ratio: 1/1; size: cover; border-radius: 50%; margin-right: 10px;">
+                    <img src="{{post_detail.author_profile_picture}}" alt="author profile picture"
+                        style="width:25px; height: 25px; aspect-ratio: 1/1; size: cover; border-radius: 50%; margin-right: 10px;">
                     <p style="font-size: 1rem;">{{post_detail.post.author.username}}</p>
                 </span>
             </div>
-            <div class="card__arrow">
-                <a href="{{ url_for('view_post', post_id=post_detail.post.id) }}">
+            <a href="{{ url_for('view_post', post_id=post_detail.post.id) }}">
+                <div class="card__arrow">
+
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
                         <path fill="#fff"
                             d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z">
                         </path>
-                    </svg></a>
-            </div>
+                    </svg>
+                </div>
+            </a>
         </div>
         {% endfor %}
     </div>

@@ -207,7 +207,7 @@ def login():
         else:
             flash('Login failed. Check your username and password.', 'danger')
 
-    return render_template('login.html')
+    return render_template('/auth/login.html')
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -248,7 +248,7 @@ def register():
             flash('Registration successful! You can now log in.', 'success')
             return redirect(url_for('login'))
 
-    return render_template('register.html')
+    return render_template('/auth/register.html')
 
 @app.route('/logout')
 def logout():

@@ -18,18 +18,18 @@ from werkzeug.utils import secure_filename
 import pytz
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
+from os import environ as env
+from dotenv import find_dotenv, load_dotenv
+import google.generativeai as genai
 # import json
-# from os import environ as env
 # from urllib.parse import quote_plus, urlencode
 
 # from authlib.integrations.flask_client import OAuth
-# from dotenv import find_dotenv, load_dotenv
 # import pyrebase
 
-
-# ENV_FILE = find_dotenv()
-# if ENV_FILE:
-#     load_dotenv(ENV_FILE)
+ENV_FILE = find_dotenv()
+if ENV_FILE:
+    load_dotenv(ENV_FILE)
 
 utc_now = datetime.utcnow()
 ist_timezone = pytz.timezone('Asia/Kolkata')
@@ -408,6 +408,21 @@ def change_pass():
             flash('Password changed successfully!', 'success')
             return redirect(url_for('dashboard'))
     return render_template('change_password.html')
+
+@app.route('/generate', methods=['GET', 'POST'])
+def generate():
+    if request.method == 'POST':
+        topic = request.form['topic']
+        print(topic)
+        GOOGLE_API_KEY = env.get("GOOGLE_API_KEY")
+        genai.configure(api_key=GOOGLE_API_KEY)
+        model = genai.GenerativeModel('gemini-pro')
+        response = model.generate_content(f"You need to provide a detailed premium quality class notes on the following topic. Make sure to add all the important points and sources so that user can search the resources as well. Make sure to add <br> tag after each heading, paragraphs etc as I am gonna show it in a website. And also return plane text instead of markdown. Now generate premium quality notes on the topic {topic}")
+        # for chunk in response:
+        #     print(chunk.text)
+        #     print("_"*80)
+        return render_template('generate_notes.html', result=response)
+    return render_template('generate_notes.html')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=6011)

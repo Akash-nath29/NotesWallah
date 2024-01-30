@@ -59,7 +59,7 @@ nav {
 }
 
 nav .nav-links a {
-    font-size: 1.2rem;
+    font-size: 15px;
     font-weight: 500;
     color: #000;
     text-decoration: none;
@@ -67,6 +67,17 @@ nav .nav-links a {
 }
 
 nav .nav-links a:hover {
+    text-decoration: underline;
+}
+.nav .nav-links a {
+    font-size: 10px;
+    font-weight: 500;
+    color: #000;
+    text-decoration: none;
+    margin-left: 2rem;
+}
+
+.nav .nav-links a:hover {
     text-decoration: underline;
 }
 
@@ -127,7 +138,7 @@ nav .nav-links a:hover {
 }
 
 .nav .nav-links a {
-    font-size: 1.2rem;
+    font-size: 15px;
     font-weight: 500;
     color: #000;
     text-decoration: none;
@@ -655,6 +666,58 @@ td {
 
 .card-dashboard:hover .card__arrow svg {
     transform: translateX(3px);
+}
+
+.controls {
+    width: 100%;
+}
+
+.generate-form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* flex-direction: column; */
+    gap: 12px;
+}
+
+/* .generate-form span {
+    width: 100%;
+    gap: 10px;
+} */
+
+generated-notes {
+    white-space: pre-line;
+}
+
+.generate-form input {
+    width: 30%;
+    padding: 10px 20px;
+    outline: none;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.generate-form button {
+    /* width: 100%; */
+    padding: 10px 20px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    /* font-weight: 600; */
+    cursor: pointer;
+    margin: 0 5vh;
+}
+.result {
+    width: 80%;
+    /* border: 1px solid #000; */
+    text-align: center;
+    margin: 5vh 0;
+}
+.result h1 {
+    color: rgb(76, 76, 76);
 }
 
 @media only screen and (max-width: 600px) {

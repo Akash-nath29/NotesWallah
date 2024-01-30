@@ -9,8 +9,7 @@
 
 NotesWallah is a feature-rich Flask-based platform designed for sharing class notes and study music. It provides a seamless and secure environment for students to collaborate, learn, and enjoy music tailored to their study sessions.
 
-![notesWallahHome](https://github.com/Akash-nath29/NotesWallah/assets/100131577/4f940462-5a80-4e4d-a826-e6dea6ad52c1)
-
+![image](https://github.com/Akash-nath29/NotesWallah/assets/100131577/47cbee06-77df-46f6-a3b4-0d8e938af544)
 
 
 ## Key Features 🚀

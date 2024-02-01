@@ -85,21 +85,6 @@ class Music(db.Model):
 # admin.add_view(ModelView(Post, db.session))
 # admin.add_view(ModelView(Music, db.session))
 
-# firebaseConfig = {
-#           'apiKey' : "AIzaSyCQkjV7XaPn6woOpi97Jl-XZtFsfz8NZFg",
-#           'authDomain' : "noteswallah2023.firebaseapp.com",
-#           'databaseURL' : "https://noteswallah2023-default-rtdb.asia-southeast1.firebasedatabase.app/",
-#           'projectId' : "noteswallah2023",
-#           'storageBucket' : "noteswallah2023.appspot.com",
-#           'messagingSenderId' : "936818867625",
-#           'appId' : "1:936818867625:web:41a3363ad80ce0e240d8b8",
-#           'measurementId' : "G-7ZZH98GYBP"
-#         };
-
-# firebase = pyrebase.initialize_app(firebaseConfig)
-
-# auth = firebase.auth()
-
 @app.route('/admin')
 def admin_panel():
     

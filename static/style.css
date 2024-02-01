@@ -914,4 +914,16 @@ generated-notes {
     .btn-download {
         margin: 2vh 0;
     }
+    .generate-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        width: 100%;
+        /* padding: 0 2vh; */
+    }
+    .generate-form input, button {
+        width: 80%;
+    }
 }

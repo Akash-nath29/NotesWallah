@@ -79,7 +79,7 @@
         </div>
         <br><br><br><br><br>
         <div class="controls">
-            <form action="/generate" method="post" class="generate-form">
+            <form action="/generate" method="post" class="generate-form" onsubmit="noRefresh(e)">
                 <!-- <label for="id">Enter Topic Name</label> -->
                 <input list="topics" name="topic" id="topic" placeholder="Enter Topic Name">
                 <datalist id="topics">
@@ -95,12 +95,7 @@
         </div>
         <div class="result">
             {% if result %}
-            <button onclick="downloadNote()">Download Note</button>
-            <!-- {% for notes in result %}
-            <div class="generated-notes">
-                {{notes.text}}
-            </div>
-            {% endfor %} -->
+            <center><button onclick="downloadNote()">Download Note</button></center>
             <div class="generated-notes">
                 {{result|safe}}
             </div>
@@ -206,6 +201,9 @@
         </center>
     </div>
     <script>
+        const noRefresh = (e) => {
+            e.preventDefault();
+        };
         function downloadNote() {
             var topic = document.querySelector('#topic').value;
             var classNotesContent = document.querySelector('.generated-notes').innerText;

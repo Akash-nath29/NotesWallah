@@ -22,10 +22,10 @@ from os import environ as env
 from dotenv import find_dotenv, load_dotenv
 import google.generativeai as genai
 import markdown2
+from authlib.integrations.flask_client import OAuth
+from urllib.parse import quote_plus, urlencode
 # import json
-# from urllib.parse import quote_plus, urlencode
 
-# from authlib.integrations.flask_client import OAuth
 # import pyrebase
 
 ENV_FILE = find_dotenv()
@@ -41,17 +41,18 @@ app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database.db"
 app.secret_key = secrets.token_hex(64)
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
 
-# oauth = OAuth(app)
+oauth = OAuth(app)
 
-# oauth.register(
-#     "auth0",
-#     client_id=env.get("AUTH0_CLIENT_ID"),
-#     client_secret=env.get("AUTH0_CLIENT_SECRET"),
-#     client_kwargs={
-#         "scope": "openid profile email",
-#     },
-#     server_metadata_url=f'https://{env.get("AUTH0_DOMAIN")}/.well-known/openid-configuration'
-# )
+oauth.register(
+    "auth0",
+    client_id=env.get("AUTH0_CLIENT_ID"),
+    client_secret=env.get("AUTH0_CLIENT_SECRET"),
+    redirect_uri=env.get("AUTH0_CALLBACK_URL"),
+    client_kwargs={
+        "scope": "openid profile email",
+    },
+    server_metadata_url=f'https://{env.get("AUTH0_DOMAIN")}/.well-known/openid-configuration',
+)
 
 db = SQLAlchemy(app)
 
@@ -63,7 +64,7 @@ class User(db.Model):
     password = db.Column(db.Text, nullable=False)
     posts = db.relationship('Post', backref='author', lazy=True)
     musics = db.relationship('Music', backref='author', lazy=True)
-    profile_picture = db.Column(db.String(255), default='static/img/default.png')
+    profile_picture = db.Column(db.String(255))
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -194,6 +195,61 @@ def login():
             flash('Login failed. Check your username and password.', 'danger')
 
     return render_template('/auth/login.html')
+
+
+# @app.route('/login')
+# def login():
+#     return oauth.auth0.authorize_redirect(
+#         redirect_uri=url_for("callback", _external=True)
+#     )
+
+# @app.route('/callback')
+# def callback():
+#     try:
+#         token = oauth.auth0.authorize_access_token()
+#         userinfo = oauth.auth0.parse_id_token(
+#             token, nonce=session.get('nonce'))
+#         session["user"] = userinfo
+#         print(userinfo)
+#         print(session["user"])
+#         print(userinfo)
+
+#         # Check if the user already exists in the local database
+#         user = User.query.filter_by(email=userinfo['email']).first()
+
+#         if not user:
+#             # If the user doesn't exist, create a new user in the local database
+#             user = User(
+#                 username=userinfo['nickname'], email=userinfo['email'], profile_picture=userinfo['picture'])
+#             db.session.add(user)
+#             db.session.commit()
+
+#         # Store the user information in the session
+#         session['user'] = userinfo
+#         user_id = userinfo['sub']
+
+#         return redirect(url_for('dashboard'))
+#     except Exception as e:
+#         flash(f'Error during callback: {str(e)}', 'danger')
+#         return redirect('/')
+
+
+# # @app.route("/logout")
+# # def logout():
+# #     session.clear()
+# #     return redirect(
+# #         "https://"
+# #         + env.get("AUTH0_DOMAIN")
+# #         + "/v2/logout?"
+# #         + urlencode(
+# #             {
+# #                 "returnTo": url_for("home", _external=True),
+# #                 "client_id": env.get("AUTH0_CLIENT_ID"),
+# #             },
+# #             quote_via=quote_plus,
+# #         )
+# #     )
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():

@@ -146,7 +146,8 @@
             </div>
         </div> -->
         <div class="card-dashboard">
-            <h3 class="card__title">{{post_detail.post.file_name}}
+            <h3 class="card__title"><a
+                    href="{{ url_for('view_post', post_id=post_detail.post.id) }}">{{post_detail.post.file_name}}</a>
             </h3>
             <p class="card__content">{{post_detail.post.file_description}}</p>
             <div class="card__date">

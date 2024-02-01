@@ -688,6 +688,18 @@ td {
 
 generated-notes {
     white-space: pre-line;
+    justify-content: left;
+    width: 60%;
+}
+
+.result button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 2vh 0;
 }
 
 .generate-form input {
@@ -713,7 +725,6 @@ generated-notes {
 .result {
     width: 80%;
     /* border: 1px solid #000; */
-    text-align: center;
     margin: 5vh 0;
 }
 .result h1 {

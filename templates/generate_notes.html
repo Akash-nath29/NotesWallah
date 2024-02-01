@@ -96,13 +96,16 @@
         <div class="result">
             {% if result %}
             <button onclick="downloadNote()">Download Note</button>
-            {% for notes in result %}
+            <!-- {% for notes in result %}
             <div class="generated-notes">
                 {{notes.text}}
             </div>
-            {% endfor %}
+            {% endfor %} -->
+            <div class="generated-notes">
+                {{result|safe}}
+            </div>
             {% else %}
-            <h1>Your Notes will appear here</h1>
+            <center><h1>Your Notes will appear here</h1></center>
             {% endif %}
         </div>
     </div>

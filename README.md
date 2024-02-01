@@ -55,11 +55,7 @@ To run the NotesWallah platform locally, follow these steps:
     ```
     ```bash
     from app import db
-    ```
-    ```bash
     db.create_all()
-    ```
-    ```bash
     exit()
     ```
 

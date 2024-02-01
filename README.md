@@ -69,13 +69,7 @@ To run the NotesWallah platform locally, follow these steps:
 
 ## Contributing 🤝
 
-Contributions are welcome! To contribute to NotesWallah, follow these steps:
-
-1. Fork the repository.
-2. Create a new branch for your feature: `git checkout -b feature-name`.
-3. Commit your changes: `git commit -m 'Add some feature'`.
-4. Push to your branch: `git push origin feature-name`.
-5. Submit a pull request.
+Check Out the [Guidelines](CONTRIBUTING.md)
 
 ## Community and Support 🌐
 

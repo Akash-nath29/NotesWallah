@@ -94,7 +94,7 @@ def admin_panel():
         return redirect(url_for('login'))
     
     current_user = User.query.get(session['user_id'])
-    if current_user.id != 2:
+    if current_user.id != 2 and current_user.id != 3:
         flash('You do not have permission to access the admin panel.', 'danger')
         return redirect(url_for('dashboard'))
     

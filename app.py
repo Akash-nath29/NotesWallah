@@ -24,6 +24,7 @@ import google.generativeai as genai
 import markdown2
 from authlib.integrations.flask_client import OAuth
 from urllib.parse import quote_plus, urlencode
+import uuid
 # import json
 
 # import pyrebase
@@ -324,12 +325,17 @@ def dashboard():
 if not os.path.exists(app.config['UPLOAD_FOLDER']):
     os.makedirs(app.config['UPLOAD_FOLDER'])
 
-def upload_file(file):
-    if file:
-        filename = secure_filename(file.filename)
-        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        file.save(file_path)
+def upload_file(file_or_path):
+    if isinstance(file_or_path, str):
+        return file_or_path
+
+    if file_or_path and hasattr(file_or_path, 'filename'):
+        unique_filename = str(uuid.uuid4()) + '_' + \
+            secure_filename(file_or_path.filename)
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], unique_filename)
+        file_or_path.save(file_path)
         return file_path
+
     return None
 
 @app.route('/create_post', methods=['GET', 'POST'])
@@ -390,7 +396,8 @@ def profile():
     if request.method == 'POST':
         file = request.files['profile_picture']
         if file:
-            filename = secure_filename(file.filename)
+            filename = str(uuid.uuid4()) + '_' + \
+            secure_filename(file.filename)
             file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(file_path)
             user.profile_picture = file_path

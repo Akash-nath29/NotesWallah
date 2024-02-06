@@ -1,3 +1,5 @@
+<center><img src="https://github.com/Akash-nath29/NotesWallah/assets/100131577/b01c26c9-1219-4c47-8a23-44ca2c5329ff" width="150px"></center>
+
 # NotesWallah - Class Notes and Study Music Sharing Platform 📚🎶
 
 [![GitHub stars](https://img.shields.io/github/stars/Akash-nath29/NotesWallah.svg?style=flat-square)](https://github.com/Akash-nath29/NotesWallah/stargazers)

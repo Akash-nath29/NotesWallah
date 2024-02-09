@@ -21,3 +21,18 @@ function openMenu() {
         menu.style.display = "none";
     }
 }
+
+// Profile Links List
+let btn = document.getElementById("profile-pic");
+let profile_links = document.getElementById("profile-links");
+
+profile_links.style.maxHeight = '0px';
+
+btn.addEventListener('click', () => {
+    if (profile_links.style.maxHeight == '0px') {
+        profile_links.style.maxHeight = '500px';
+    }
+    else {
+        profile_links.style.maxHeight = '0px';
+    }
+})

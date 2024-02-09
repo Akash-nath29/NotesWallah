@@ -309,7 +309,6 @@ def dashboard():
     musics = Music.query.order_by(desc(Music.id)).all()
     post_details = []
     music_details = []
-
     for post in posts:
         author = post.author
         profile_picture = author.profile_picture
@@ -320,7 +319,9 @@ def dashboard():
         profile_picture = author.profile_picture
         music_details.append({'music': music, 'author_profile_picture': profile_picture})
 
-    return render_template('dashboard.html', post_details=post_details, musiclist=music_details)
+    current_user = User.query.filter_by(id=session['user_id']).first()
+    
+    return render_template('dashboard.html', post_details=post_details, musiclist=music_details, curr_user=current_user)
 
 if not os.path.exists(app.config['UPLOAD_FOLDER']):
     os.makedirs(app.config['UPLOAD_FOLDER'])
@@ -363,16 +364,17 @@ def create_post():
 
         else:
             flash('Please upload a file.', 'danger')
-
-    return render_template('create_post.html')
+    current_user = User.query.filter_by(id=session['user_id']).first()
+    return render_template('create_post.html', curr_user=current_user)
 
 @app.route('/view_post/<int:post_id>')
 def view_post(post_id):
     post = Post.query.get(post_id)
     file_path = post.file_path.replace("static/", "")
     # print(file_path)
+    current_user = User.query.filter_by(id=session['user_id']).first()
     if post:
-        return render_template('view_post.html', post=post, file_path=file_path)
+        return render_template('view_post.html', post=post, file_path=file_path, curr_user=current_user)
     else:
         abort(404)
 
@@ -442,8 +444,8 @@ def share_music():
 
         else:
             flash('Please upload a Music.', 'danger')
-
-    return render_template('study_music.html')
+    current_user = User.query.filter_by(id=session['user_id']).first()
+    return render_template('study_music.html', curr_user=current_user)
 
 @app.route('/change_password', methods=['GET', 'POST'])
 def change_pass():
@@ -471,8 +473,10 @@ def generate():
         #     print(chunk.text)
         #     print("_"*80)
         html_content = markdown2.markdown(response.candidates[0].content.parts[0].text)
-        return render_template('generate_notes.html', result=html_content)
-    return render_template('generate_notes.html')
+        current_user = User.query.filter_by(id=session['user_id']).first()
+        return render_template('generate_notes.html', result=html_content, curr_user=current_user)
+    current_user = User.query.filter_by(id=session['user_id']).first()
+    return render_template('generate_notes.html', curr_user = current_user)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=6011)

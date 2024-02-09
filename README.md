@@ -13,12 +13,10 @@ NotesWallah is a feature-rich Flask-based platform designed for sharing class no
 
 ![image](https://github.com/Akash-nath29/NotesWallah/assets/100131577/e1ff2449-2003-4d97-9a99-93f198088aef)
 
-## Version:2.0.2
-- Improved AI response.
+## Version:2.0.3
+- Redesigned Profile Section.
 - UI improvements.
 - Bug fixes.
-- Able to download readable notes as a text file
-- Used [Gemini API](https://deepmind.google/technologies/gemini/#introduction) for the notes generation process.
 
 ## Key Features 🚀
 

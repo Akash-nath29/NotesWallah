@@ -52,10 +52,14 @@ nav {
 .nav-links {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     list-style: none;
-    margin-right: 5vh;
+    /* margin-right: 5vh; */
     width: 70%;
+}
+
+.nav-links #logout {
+    color: red;
 }
 
 nav .nav-links a {
@@ -120,6 +124,7 @@ nav .nav-links a:hover {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    z-index: 999;
 }
 
 .nav .nav-brand {
@@ -135,6 +140,7 @@ nav .nav-links a:hover {
 
 .nav .nav-links {
     margin-right: 5vh;
+    z-index: 999;
 }
 
 .nav .nav-links a {
@@ -540,9 +546,17 @@ td {
     border-radius: 50%;
     object-fit: cover;
 }
-
 .user-profile {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+}
+
+#user-profile-fields {
+    display: flex;
+    /* flex-direction: column; */
     align-items: center;
     justify-content: center;
     gap: 20px;
@@ -593,7 +607,7 @@ td {
 
 #file-preview {
     width: 500px;
-    height: 300px;
+    height: 550px;
 }
 
 .post-details {
@@ -734,6 +748,38 @@ generated-notes {
     color: rgb(76, 76, 76);
 }
 
+#profile-menu-opener {
+    margin: 0 5vh;
+}
+
+#profile-menu-opener img {
+    /* position: absolute;
+    top: -15px;
+    left: 50%; */
+    margin-right: 2vh;
+}
+
+/* .profile-links {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 999;
+    overflow: hidden;
+    transform-origin: top;
+    transition: 0.4s;
+    width: 100%;
+    background-color: white;
+    box-shadow: none;
+} */
+
+#profile_link {
+    margin: auto;
+}
+
+.profile-links li {
+    list-style: none;
+}
+
 @media only screen and (max-width: 600px) {
     #hamburgerIcon {
         display: block;
@@ -756,6 +802,7 @@ generated-notes {
         margin-top: auto;
         margin-bottom: auto;
         width: 100%;
+        font-size: 20px;
     }
 
     .nav .nav-links {
@@ -766,7 +813,7 @@ generated-notes {
         align-items: flex-start;
         justify-content: center;
         /* overflow: hidden; */
-        z-index: 1001;
+        z-index: 9999;
         /* overflow: visible; */
         margin-right: 0;
         margin-top: 5vh;
@@ -774,7 +821,8 @@ generated-notes {
         line-height: 45px;
         box-shadow: 0 0 10px #000;
         padding: 2vh 0;
-
+        transform-origin: top;
+        transition: 0.4s;
     }
 
     .nav-links a {

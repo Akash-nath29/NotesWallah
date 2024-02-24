@@ -1,135 +1,67 @@
 {% extends 'base.html' %}
 {% block body %}
-<div class="nav">
-    <span id="mobileFriendlyHeader"
-        style="display: flex; align-items: center; justify-content: space-between; margin: auto;">
-        <a href="/dashboard" class="nav-brand">
-            <img src="{{url_for('static', filename='img/favicon.png')}}" alt="" style="width: 30px; margin-right: 1vw;">
-            Notes Wallah
-        </a>
-        <button id="hamburgerIcon" onclick="openMenu()"><svg xmlns="http://www.w3.org/2000/svg" height="30" width="30"
-                viewBox="0 0 448 512" style="margin-right: 5vh;">
-                <path fill="#000000"
-                    d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
-            </svg></button>
-    </span>
-    <div class="nav-links" id="navLinks">
-        <a href="/dashboard">
-            <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">
-                <path fill="#000000"
-                    d="M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64V400c0 44.2 35.8 80 80 80H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H80c-8.8 0-16-7.2-16-16V64zm406.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L320 210.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L240 221.3l57.4 57.4c12.5 12.5 32.8 12.5 45.3 0l128-128z" />
-            </svg>
-            Dashboard
-        </a>
-        <a href="/create_post">
-            <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512">
-                <path fill="#000000"
-                    d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
-            </svg>
-            Share Notes
-        </a>
-        <a href="/study_music">
-            <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">
-                <path fill="#000000"
-                    d="M256 80C149.9 80 62.4 159.4 49.6 262c9.4-3.8 19.6-6 30.4-6c26.5 0 48 21.5 48 48V432c0 26.5-21.5 48-48 48c-44.2 0-80-35.8-80-80V384 336 288C0 146.6 114.6 32 256 32s256 114.6 256 256v48 48 16c0 44.2-35.8 80-80 80c-26.5 0-48-21.5-48-48V304c0-26.5 21.5-48 48-48c10.8 0 21 2.1 30.4 6C449.6 159.4 362.1 80 256 80z" />
-            </svg>
-            Share Study Music
-        </a>
-        <a href="/profile">
-            <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512">
-                <path fill="#000000"
-                    d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
-            </svg>
-            Profile
-        </a>
-        <a href="/logout">
-            <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">
-                <path fill="#000000"
-                    d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z" />
-            </svg>
-            Logout
-        </a>
-    </div>
-</div>
-<br><br><br><br><br>
-<div class="header"
-    style="top: 0; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; position: absolute; margin: 15vh; z-index: 999; background-color: white; padding: 20px 0; margin-bottom: 5vh;">
-    <h2>Dashboard</h2>
-    <div class="tabButtons" style="width: 80%; display: flex; border-bottom: 1px solid #dddddd; margin-top: 2vh;">
-        <button class="tabLinks1" onclick="openNote()">Notes</button>
-        <button class="tabLinks2" onclick="openMusic()">Music</button>
+<div class="controls">
+    <div class="buttons">
+        <button onclick="openNotes()">Notes</button>
+        <button onclick="openMusic()">Music</button>
     </div>
 </div>
 {% if post_details %}
 <div class="tab-container" style="position: relative;">
-    <div class="tabContent" id="notes"
-        style="position: absolute; width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
-        <!-- <table>
-            <th>
-                <tr>
-                    <td>Author</td>
-                    <td>Filename</td>
-                    <td>View File</t>
-                    <td>Date Uploaded</td>
-                </tr>
-            </th>
-            {% for post_detail in post_details %}
-            <!-- <a href="{{ url_for('view_post', post_id=post_detail.post.id) }}"
-            style="color: black;text-decoration: none;margin-top: 5vh;display: flex;flex-direction: column;align-items: center;justify-content: center; width: 70%;">
-            <div class="post-container"
-                style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 70%; border: 1px solid black; padding: 20px; margin-top: 5vh;">
-                <h3>{{ post_detail.post.file_name }}</h3>
-
-                <span style="display: flex; align-items: center; justify-content: center; margin: 2vh 0 0 0;">
-                    <img src="{{ post_detail.author_profile_picture }}" alt="Author's Profile Picture" width="50px"
-                        style="border-radius: 50%; aspect-ratio: 1/1; size: cover;">
-                    <p><a href="{{ url_for('author_profile', user_id=post_detail.post.author.id) }}">{{
-                            post_detail.post.author.username }}</a></p>
-                </span>
-                <p>{{ post_detail.post.posted_at.strftime('%Y-%m-%d %H:%M:%S') }}</p>
-
+    <div class="tabContent" id="notes">
+        <a href="/jisce">
+            <div class="card-college">
+                <div class="card-img"></div>
+                <div class="card-info">
+                    <div class="card-text">
+                        <p class="text-title">JISCE</p>
+                    </div>
+                    <div class="card-icon">
+                        <svg class="icon" viewBox="0 0 28 25">
+                            <path
+                                d="M13.145 2.13l1.94-1.867 12.178 12-12.178 12-1.94-1.867 8.931-8.8H.737V10.93h21.339z">
+                            </path>
+                        </svg>
+                    </div>
+                </div>
             </div>
         </a>
-            <tr>
-                <td><a style="display: flex; align-items: center; justify-content: center; gap: 2px;"
-                        href="{{ url_for('author_profile', user_id=post_detail.post.author.id) }}">
-                        <img src="{{post_detail.author_profile_picture}}" alt="Author" width="30" height="30"
-                            style="border-radius: 50%; background-size: cover; aspect-ratio: 1/1;">{{post_detail.post.author.username}}</a>
-                </td>
-                <td>{{post_detail.post.file_name}}</td>
-                <td><a href="{{ url_for('view_post', post_id=post_detail.post.id) }}">Click Here To view</a>
-                </td>
-                <td>{{post_detail.post.posted_at}}</td>
-            </tr>
-            {% endfor %}
-        </table> -->
-        {% for post_detail in post_details %}
-        <div class="dashboard-card">
-            <div class="dashboard-image">
-                <iframe src="{{post_detail.post.file_path}}" frameborder="0" oncontextmenu="return false;"></iframe>
+        <a href="/nit">
+            <div class="card-college">
+                <div class="card-img nit"></div>
+                <div class="card-info">
+                    <div class="card-text">
+                        <p class="text-title">NIT</p>
+                    </div>
+                    <div class="card-icon">
+                        <svg class="icon" viewBox="0 0 28 25">
+                            <path
+                                d="M13.145 2.13l1.94-1.867 12.178 12-12.178 12-1.94-1.867 8.931-8.8H.737V10.93h21.339z">
+                            </path>
+                        </svg>
+                    </div>
+                </div>
             </div>
-            <div class="dashboard-content">
-                <a href="#">
-                    <span class="title">
-                        {{post_detail.post.file_name}}
-                    </span>
-                </a>
-
-                <p class="desc">
-                    {{post_detail.post.file_description}}
-                </p>
-
-                <a class="action" href="{{ url_for('view_post', post_id=post_detail.post.id) }}">
-                    View File
-                    <span aria-hidden="true">
-                        →
-                    </span>
-                </a>
+        </a>
+        <a href="/jisu">
+            <div class="card-college">
+                <div class="card-img jisuni"></div>
+                <div class="card-info">
+                    <div class="card-text">
+                        <p class="text-title">JIS Uni</p>
+                    </div>
+                    <div class="card-icon">
+                        <svg class="icon" viewBox="0 0 28 25">
+                            <path
+                                d="M13.145 2.13l1.94-1.867 12.178 12-12.178 12-1.94-1.867 8.931-8.8H.737V10.93h21.339z">
+                            </path>
+                        </svg>
+                    </div>
+                </div>
             </div>
-        </div>
-        {% endfor %}
+        </a>
     </div>
-    <div id="music" class="tabContent" style="grid-template-columns: repeat(2, 1fr); gap: 10px;">
+    <div class="tabContent" id="music">
         {% for music in musiclist %}
         <div class="music-card" style="flex-basis: 50%;">
             <span style="display: flex; align-items: center; justify-content: center; margin: 2vh 0;"><img
@@ -140,9 +72,8 @@
                     {{music.music.posted_at.strftime("%Y %H:%M:%S")}}
                 </p>
             </span>
-            <iframe width="500" height="300" id="musicFrame"
-                src="https://www.youtube.com/embed/{{music.music.music_link}}" title="{{music.music.music_name}}"
-                frameborder="0"
+            <iframe id="musicFrame" src="https://www.youtube.com/embed/{{music.music.music_link}}"
+                title="{{music.music.music_name}}" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowfullscreen style="border: 1px solid black;"></iframe>
         </div>
@@ -150,8 +81,10 @@
     </div>
 </div>
 {% else %}
-<center>
-    <h1 style="color: grey; font-size: 30px; margin: 5vh auto;">No Posts Available</h1>
-</center>
+<div class="text-content">
+    <center>
+        <h1 style="color: grey; font-size: 30px;">No Posts Available</h1>
+    </center>
+</div>
 {% endif %}
 {% endblock %}

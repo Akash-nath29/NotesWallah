@@ -1,168 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% block body %}
+<div class="main">
+    <b><h2 class="share-music-header">Share Notes</h2></b>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Notes Wallah{% endblock %}</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
-            margin: 15vh 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <ul>
+        {% for category, message in messages %}
+        <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
 
-        h2 {
-            color: #333;
-            margin-top: 10vh;
-        }
-
-        form {
-            max-width: 300px;
-            margin: 20px;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        input {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 16px;
-            box-sizing: border-box;
-            resize: none;
-        }
-
-        button {
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        li.success {
-            color: #28a745;
-        }
-
-        li.danger {
-            color: #dc3545;
-        }
-
-        p {
-            margin-top: 20px;
-        }
-
-        a {
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
-    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
-    <link rel="shortcut icon" href="{{url_for('static', filename='img/favicon.png')}}" type="image/png">
-</head>
-
-<body>
-    <div class="container">
-        <div class="nav">
-            <span id="mobileFriendlyHeader" style="display: flex; align-items: center; justify-content: space-between; margin: auto;">
-                <a href="/dashboard" class="nav-brand">
-                    <img src="{{url_for('static', filename='img/favicon.png')}}" alt="" style="width: 30px; margin-right: 1vw;">
-                    Notes Wallah
-                </a>
-                <svg id="hamburgerIcon" xmlns="http://www.w3.org/2000/svg" height="30" width="30" viewBox="0 0 448 512" onclick="openMenu()" style="margin-right: 5vh;">
-                    <path fill="#000000" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
-                </svg>
-            </span>
-            <div class="nav-links">
-                <a href="/dashboard">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">
-                        <path fill="#000000"
-                            d="M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64V400c0 44.2 35.8 80 80 80H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H80c-8.8 0-16-7.2-16-16V64zm406.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L320 210.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L240 221.3l57.4 57.4c12.5 12.5 32.8 12.5 45.3 0l128-128z" />
-                    </svg>
-                    Dashboard
-                </a>
-                <a href="/create_post">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512">
-                        <path fill="#000000"
-                            d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
-                    </svg>
-                    Share Notes
-                </a>
-                <a href="/study_music">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">
-                        <path fill="#000000"
-                            d="M256 80C149.9 80 62.4 159.4 49.6 262c9.4-3.8 19.6-6 30.4-6c26.5 0 48 21.5 48 48V432c0 26.5-21.5 48-48 48c-44.2 0-80-35.8-80-80V384 336 288C0 146.6 114.6 32 256 32s256 114.6 256 256v48 48 16c0 44.2-35.8 80-80 80c-26.5 0-48-21.5-48-48V304c0-26.5 21.5-48 48-48c10.8 0 21 2.1 30.4 6C449.6 159.4 362.1 80 256 80z" />
-                    </svg>
-                    Share Study Music
-                </a>
-                <a href="/profile">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512">
-                        <path fill="#000000"
-                            d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
-                    </svg>
-                    Profile
-                </a>
-                <a href="/logout">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16"
-                        viewBox="0 0 512 512">
-                        <path fill="#000000"
-                            d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z" />
-                    </svg>
-                    Logout
-                </a>
-            </div>
-        </div>
-        <h2>Share Music</h2>
-
-        {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-        <ul>
-            {% for category, message in messages %}
-            <li class="{{ category }}">{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}
-
-        <form method="POST" action="/study_music">
-            <label for="music_link">Music Link (Paste YouTube Link):</label>
+    <form class="share-music-generate" method="POST" action="{{ url_for('share_music') }}"
+        enctype="multipart/form-data">
+        <label for="music_link">Music Link (Paste YouTube Link):</label>
             <input type="text" id="music_link" name="music_link" required>
             <label for="music_link">Add Music Name:</label>
             <input type="text" id="music_name" name="music_name" required>
 
             <button type="submit">Share Notes</button>
-        </form>
+    </form>
 
-        <p>Return to <a href="{{ url_for('dashboard') }}">Dashboard</a>.</p>
-    </div>
-</body>
-
-</html>
+    <p>Return to <a href="{{ url_for('dashboard') }}">Dashboard</a>.</p>
+</div>
+{% endblock %}

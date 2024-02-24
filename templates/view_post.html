@@ -1,88 +1,49 @@
 {% extends 'base.html' %}
-
 {% block body %}
-<div class="nav">
-    <span id="mobileFriendlyHeader"
-        style="display: flex; align-items: center; justify-content: space-between; margin: auto;">
-        <a href="/dashboard" class="nav-brand">
-            <img src="{{url_for('static', filename='img/favicon.png')}}" alt="" style="width: 30px; margin-right: 1vw;">
-            Notes Wallah
-        </a>
-        <svg id="hamburgerIcon" xmlns="http://www.w3.org/2000/svg" height="30" width="30" viewBox="0 0 448 512"
-            onclick="openMenu()" style="margin-right: 5vh;">
-            <path fill="#000000"
-                d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
-        </svg>
-    </span>
-    <div class="nav-links">
-        <a href="/dashboard">
-            <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">
-                <path fill="#000000"
-                    d="M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64V400c0 44.2 35.8 80 80 80H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H80c-8.8 0-16-7.2-16-16V64zm406.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L320 210.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L240 221.3l57.4 57.4c12.5 12.5 32.8 12.5 45.3 0l128-128z" />
-            </svg>
-            Dashboard
-        </a>
-        <a href="/create_post">
-            <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512">
-                <path fill="#000000"
-                    d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
-            </svg>
-            Share Notes
-        </a>
-        <a href="/study_music">
-            <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">
-                <path fill="#000000"
-                    d="M256 80C149.9 80 62.4 159.4 49.6 262c9.4-3.8 19.6-6 30.4-6c26.5 0 48 21.5 48 48V432c0 26.5-21.5 48-48 48c-44.2 0-80-35.8-80-80V384 336 288C0 146.6 114.6 32 256 32s256 114.6 256 256v48 48 16c0 44.2-35.8 80-80 80c-26.5 0-48-21.5-48-48V304c0-26.5 21.5-48 48-48c10.8 0 21 2.1 30.4 6C449.6 159.4 362.1 80 256 80z" />
-            </svg>
-            Share Study Music
-        </a>
-        <a href="/profile">
-            <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512">
-                <path fill="#000000"
-                    d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
-            </svg>
-            Profile
-        </a>
-        <a href="/logout">
-            <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">
-                <path fill="#000000"
-                    d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z" />
-            </svg>
-            Logout
-        </a>
-    </div>
-</div>
-<div class="file-container" style="margin-top: 15vh;">
-    <a href="/dashboard" style="color: #007bff; text-decoration: none; font-size: 18px; text-align: center;">
-        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512">
-            <path fill="#007bff"
-                d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
-        </svg>
-        Back to Dashboard
-    </a>
-    <a href="{{ url_for('download_file', post_id=post.id) }}" class="btn btn-primary">Download File</a>
-    <div class="card">
-        <div class="card-body">
-            <h2 class="card-title">File Details</h2>
 
-            <div class="post-details" style="display: flex; align-items: center; justify-content: space-evenly; width: 100%;">
-                {% if post.file_path %}
-                <iframe src="{{url_for('static', filename=file_path)}}" frameborder="0" width="500" height="300"
-                    style="border: 1px solid black; margin: 0 5vw;"></iframe>
-                {% else %}
-                <iframe src="Not Found" frameborder="0" width="500" height="300"
-                    style="border: 1px solid black;"></iframe>
-                {% endif %}
-                <div class="file-details">
-                    <h3>{{ post.file_name }}</h3>
-                    <p class="text-muted"><b>Author</b>: {{ post.author.username }}</p>
-                    <p><b>Description</b>: <br> {{ post.file_description }}</p>
-                    <p class="text-muted" style="font-size: 10px;">{{ post.posted_at.strftime('%Y-%m-%d %H:%M:%S') }}
-                    </p>
-                </div>
-                <br>
-            </div>
+<div class="body">
+    <div class="main" style="border-right: 2px solid black;">
+        <b>
+            <p>Return to <a href="{{ url_for('dashboard') }}">Dashboard</a>.</p>
+            <!-- <h2 class="share-notes-header">View Post</h2> -->
+        </b>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <ul>
+            {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+
+        <div class="share-notes-generate">
+            <h3>File Name: {{ post.file_name }}</h3>
+            <p>File Description: {{ post.file_description }}</p>
+            <p>College: {{ post.college }}</p>
+            <p>Uploaded By: {{ post.author.username }}</p>
+            <p>Uploaded On: {{ post.posted_at.strftime('%Y-%m-%d') }}</p>
         </div>
+        <a id="downloadBtn" href="{{ url_for('download_file', post_id=post.id) }}" download>Download</a>
+
+    </div>
+    <div class="main">
+        <div class="comment-box">
+            <h1>Comments</h1>
+            <form action="{{ url_for('add_comment', post_id=post.id) }}" method="post">
+                <input type="text" name="comment" id="comment" placeholder="Comment your thoughts..." autocomplete="off">
+                <input type="submit" value="Add"/>
+            </form>
+            <ul class="comment-list">
+                {% for comment in comments %}
+                <li><strong>{{ comment.author.username }}</strong>: {{ comment.comment }}    <i style="font-size: 10px;">{{ comment.commented_at }}</i></li>
+                {% endfor %}
+            </ul>
+
+        </div>
+
     </div>
 </div>
+
 {% endblock %}

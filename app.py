@@ -25,8 +25,11 @@ import markdown2
 from authlib.integrations.flask_client import OAuth
 from urllib.parse import quote_plus, urlencode
 import uuid
+<<<<<<< HEAD
 from flask_migrate import Migrate
 from sqlalchemy.schema import CheckConstraint
+=======
+>>>>>>> cb89d8ca93c1c8e05f15145a02dded4664d066c0
 # import json
 
 # import pyrebase
@@ -44,8 +47,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database.db"
 app.secret_key = secrets.token_hex(64)
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
 
-# oauth = OAuth(app)
+oauth = OAuth(app)
 
+<<<<<<< HEAD
 # oauth.register(
 #     "auth0",
 #     client_id=env.get("AUTH0_CLIENT_ID"),
@@ -56,6 +60,18 @@ app.config['UPLOAD_FOLDER'] = 'static/uploads'
 #     },
 #     server_metadata_url=f'https://{env.get("AUTH0_DOMAIN")}/.well-known/openid-configuration',
 # )
+=======
+oauth.register(
+    "auth0",
+    client_id=env.get("AUTH0_CLIENT_ID"),
+    client_secret=env.get("AUTH0_CLIENT_SECRET"),
+    redirect_uri=env.get("AUTH0_CALLBACK_URL"),
+    client_kwargs={
+        "scope": "openid profile email",
+    },
+    server_metadata_url=f'https://{env.get("AUTH0_DOMAIN")}/.well-known/openid-configuration',
+)
+>>>>>>> cb89d8ca93c1c8e05f15145a02dded4664d066c0
 
 db = SQLAlchemy(app)
 migrate = Migrate(app,db,render_as_batch=True)
@@ -69,8 +85,12 @@ class User(db.Model):
     password = db.Column(db.Text, nullable=False)
     posts = db.relationship('Post', backref='author', lazy=True)
     musics = db.relationship('Music', backref='author', lazy=True)
+<<<<<<< HEAD
     comments = db.relationship('Comment', backref='author', lazy=True)
     profile_picture = db.Column(db.String(255), default='static/img/default.png')
+=======
+    profile_picture = db.Column(db.String(255))
+>>>>>>> cb89d8ca93c1c8e05f15145a02dded4664d066c0
 
 class Post(db.Model):
     __tablename__ = 'post'
@@ -78,9 +98,14 @@ class Post(db.Model):
     file_name = db.Column(db.String(100), nullable=False)
     file_description = db.Column(db.Text, nullable=True)
     file_path = db.Column(db.String(255), nullable=False)
+<<<<<<< HEAD
     college = db.Column(db.String(255), nullable=True)
     posted_at = db.Column(db.DateTime)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id',name='fk_post_user'), nullable=False)
+=======
+    posted_at = db.Column(db.DateTime)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+>>>>>>> cb89d8ca93c1c8e05f15145a02dded4664d066c0
 
 class Music(db.Model):
     __tablename__ = 'music'
@@ -90,6 +115,7 @@ class Music(db.Model):
     posted_at = db.Column(db.DateTime)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id',name='fk_music_user'), nullable=False)
 
+<<<<<<< HEAD
 class Comment(db.Model):
     __tablename__ = 'comment'
     id = db.Column(db.Integer, primary_key=True)
@@ -128,6 +154,32 @@ def admin_panel():
     return render_template("/admin/admin_panel.html", posts=posts, musics=musics, users=users, comments=comments, current_user=current_user, latest_post=latest_post, latest_music=latest_music, latest_comment=latest_comment, latest_user=latest_user)
 
 
+=======
+# admin = Admin(app)
+# admin.add_view(ModelView(User, db.session))
+# admin.add_view(ModelView(Post, db.session))
+# admin.add_view(ModelView(Music, db.session))
+
+@app.route('/admin')
+def admin_panel():
+    
+    if 'user_id' not in session:
+        flash('You need to log in first.', 'danger')
+        return redirect(url_for('login'))
+    
+    current_user = User.query.get(session['user_id'])
+    if current_user.id != 2 and current_user.id != 3:
+        flash('You do not have permission to access the admin panel.', 'danger')
+        return redirect(url_for('dashboard'))
+    
+    posts = Post.query.all()
+    users = User.query.all()
+    musics = Music.query.all()
+    
+    return render_template("/admin/admin_panel.html", posts=posts, musics=musics, users=users)
+
+
+>>>>>>> cb89d8ca93c1c8e05f15145a02dded4664d066c0
 
 @app.route('/admin/deleteuser/<int:user_id>')
 def admin_panel_delete_user(user_id):
@@ -187,6 +239,7 @@ def admin_panel_edit_music(music_id):
         return redirect(url_for('admin_panel'))
 
     return render_template('/admin/edit_music.html', music=music)
+<<<<<<< HEAD
 
 @app.route('/admin/deletecomment/<int:comment_id>')
 def admin_panel_delete_comment(comment_id):
@@ -194,6 +247,8 @@ def admin_panel_delete_comment(comment_id):
     db.session.delete(comment)
     db.session.commit()
     return redirect(url_for('admin_panel'))
+=======
+>>>>>>> cb89d8ca93c1c8e05f15145a02dded4664d066c0
 
 @app.route('/')
 def home():
@@ -389,7 +444,11 @@ def create_post():
             user_id = session['user_id']
             file_path = upload_file(file)
 
+<<<<<<< HEAD
             new_post = Post(file_name=file_name, file_description=file_description,  file_path=file_path, college=college, posted_at=ist_now, user_id=user_id)
+=======
+            new_post = Post(file_name=file_name, file_description=file_description, file_path=file_path, posted_at=ist_now, user_id=user_id)
+>>>>>>> cb89d8ca93c1c8e05f15145a02dded4664d066c0
 
             db.session.add(new_post)
             db.session.commit()
@@ -412,9 +471,14 @@ def view_post(post_id):
     file_path = post.file_path.replace("static/", "")
     # print(file_path)
     current_user = User.query.filter_by(id=session['user_id']).first()
+<<<<<<< HEAD
     comments = Comment.query.filter_by(post_id=post_id).order_by(desc(Comment.id)).all()
     if post:
         return render_template('view_post.html', post=post, file_path=file_path, curr_user=current_user, comments=comments)
+=======
+    if post:
+        return render_template('view_post.html', post=post, file_path=file_path, curr_user=current_user)
+>>>>>>> cb89d8ca93c1c8e05f15145a02dded4664d066c0
     else:
         abort(404)
 
@@ -598,6 +662,24 @@ def add_comment(post_id):
 
         flash('Comment Added successfully!', 'success')
         return redirect(url_for('view_post', post_id=post_id))
+
+@app.route('/generate', methods=['GET', 'POST'])
+def generate():
+    if request.method == 'POST':
+        topic = request.form['topic']
+        print(topic)
+        GOOGLE_API_KEY = env.get("GOOGLE_API_KEY")
+        genai.configure(api_key=GOOGLE_API_KEY)
+        model = genai.GenerativeModel('gemini-pro')
+        response = model.generate_content(f"You need to provide a detailed premium quality class notes on the following topic. Make sure to add all the important points and sources so that user can search the resources as well. Now generate premium quality notes on the topic {topic}")
+        # for chunk in response:
+        #     print(chunk.text)
+        #     print("_"*80)
+        html_content = markdown2.markdown(response.candidates[0].content.parts[0].text)
+        current_user = User.query.filter_by(id=session['user_id']).first()
+        return render_template('generate_notes.html', result=html_content, curr_user=current_user)
+    current_user = User.query.filter_by(id=session['user_id']).first()
+    return render_template('generate_notes.html', curr_user = current_user)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=6011)

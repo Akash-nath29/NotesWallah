@@ -43,4 +43,8 @@ If you have ideas for new features or improvements, feel free to open an issue o
 
 Please adhere to our [Code of Conduct](CODE_OF_CONDUCT.md) and be respectful to other contributors. We aim to foster a positive and inclusive community.
 
+<<<<<<< HEAD
 Thank you for contributing to NotesWallah! 🙌✨
+=======
+Thank you for contributing to NotesWallah! 🙌✨
+>>>>>>> cb89d8ca93c1c8e05f15145a02dded4664d066c0

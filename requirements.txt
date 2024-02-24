@@ -1,7 +1,11 @@
 Authlib==1.3.0
 blinker==1.7.0
 cachetools==5.3.2
+<<<<<<< HEAD
 certifi==2024.2.2
+=======
+certifi==2023.11.17
+>>>>>>> cb89d8ca93c1c8e05f15145a02dded4664d066c0
 cffi==1.16.0
 charset-normalizer==3.3.2
 click==8.1.7
@@ -9,13 +13,21 @@ colorama==0.4.6
 cryptography==42.0.2
 Flask==3.0.2
 Flask-Admin==1.6.1
+Flask-Mail==0.9.1
 Flask-SQLAlchemy==3.1.1
+<<<<<<< HEAD
 google-ai-generativelanguage==0.4.0
 google-api-core==2.17.0
+=======
+gcloud==0.18.3
+google-ai-generativelanguage==0.4.0
+google-api-core==2.16.0
+>>>>>>> cb89d8ca93c1c8e05f15145a02dded4664d066c0
 google-auth==2.27.0
 google-generativeai==0.3.2
 googleapis-common-protos==1.62.0
 greenlet==3.0.3
+<<<<<<< HEAD
 grpcio==1.60.1
 grpcio-status==1.60.1
 idna==3.6
@@ -34,6 +46,35 @@ requests==2.31.0
 rsa==4.9
 SQLAlchemy==2.0.25
 tqdm==4.66.2
+=======
+grpcio==1.60.0
+grpcio-status==1.60.0
+httplib2==0.22.0
+idna==3.6
+itsdangerous==2.1.2
+Jinja2==3.1.2
+jwcrypto==1.5.0
+markdown2==2.4.12
+MarkupSafe==2.1.3
+oauth2client==4.1.3
+proto-plus==1.23.0
+protobuf==4.25.1
+pyasn1==0.5.1
+pyasn1-modules==0.3.0
+pycparser==2.21
+pycryptodome==3.19.0
+pyparsing==3.1.1
+Pyrebase4==4.7.1
+python-dotenv==1.0.1
+python-jwt==4.1.0
+pytz==2023.3.post1
+requests==2.29.0
+requests-toolbelt==0.10.1
+rsa==4.9
+six==1.16.0
+SQLAlchemy==2.0.23
+tqdm==4.66.1
+>>>>>>> cb89d8ca93c1c8e05f15145a02dded4664d066c0
 typing_extensions==4.9.0
 urllib3==2.2.0
 Werkzeug==3.0.1
